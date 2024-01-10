@@ -1,3 +1,5 @@
+import 'package:apptuoicay/ui/timerPage.dart';
+import 'package:apptuoicay/ui/historyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -48,9 +50,21 @@ class _HomePageState extends State<HomePage> {
                 textSize: 25,
                 iconSize: 40,
               ),
+              // GButton(
+              //   icon: Icons.location_on,
+              //   text: 'Map',
+              //   textSize: 25,
+              //   iconSize: 40,
+              // ),
               GButton(
-                icon: Icons.location_on,
-                text: 'Map',
+                icon: Icons.watch_later,
+                text: 'Timer',
+                textSize: 25,
+                iconSize: 40,
+              ),
+              GButton(
+                icon: Icons.history_edu_outlined,
+                text: 'Logs',
                 textSize: 25,
                 iconSize: 40,
               ),
@@ -63,7 +77,10 @@ class _HomePageState extends State<HomePage> {
     return IndexedStack(
       index: chooseIndex,
       children: <Widget>[
+        // MyHomePage(),
         MyHomePage(),
+        TimerPage(),
+        HistoryPage()
         // Graph(),
       ],
     );
