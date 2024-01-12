@@ -1,3 +1,4 @@
+import 'package:apptuoicay/ui/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -22,39 +23,42 @@ class _HomePageState extends State<HomePage> {
 
   Widget bottomNavigationBar(){
     return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFFC9D2C9),
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),),
+      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: GNav(
-            tabBorderRadius: 20,
-            backgroundColor: Color(0xFFC9D2C9),
-            color: Colors.black,
-            activeColor: Colors.white,
-            tabBackgroundColor: Colors.grey.shade700,
-            padding: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-            gap: 20,
-            onTabChange: (index){
-              setState(() {
-                chooseIndex = index;
-              });
-            },
-            selectedIndex: chooseIndex,
-            tabs: [
-              GButton(
-                icon: Icons.heat_pump,
-                text: 'Home',
-                textSize: 25,
-                iconSize: 40,
-              ),
-              GButton(
-                icon: Icons.location_on,
-                text: 'Map',
-                textSize: 25,
-                iconSize: 40,
-              ),
-            ]
+          selectedIndex: chooseIndex,
+          backgroundColor: Colors.white,
+          rippleColor: Colors.white,
+          hoverColor: Colors.white,
+          haptic: true,
+          tabBorderRadius: 30,
+          tabActiveBorder: Border.all(color: Colors.transparent, width: 1,),
+          tabBorder: Border.all(color: Colors.transparent, width: 1),
+          curve: Curves.easeOutExpo,
+          duration: const Duration(milliseconds: 300),
+          gap: 8,
+          color: Colors.black38,
+          activeColor: Colors.pinkAccent,
+          iconSize: 24,
+          tabBackgroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          tabs: const [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+            ),
+            GButton(
+              icon: Icons.settings,
+              text: 'Setting',
+            ),
+          ],
+          onTabChange: (index){
+            setState(() {
+              chooseIndex = index;
+            });
+          },
         ),
       ),
     );
@@ -64,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       index: chooseIndex,
       children: <Widget>[
         MyHomePage(),
-        // Graph(),
+        Setting()
       ],
     );
   }
