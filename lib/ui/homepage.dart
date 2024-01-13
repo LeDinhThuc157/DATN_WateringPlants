@@ -1,4 +1,6 @@
 import 'package:apptuoicay/ui/setting.dart';
+import 'package:apptuoicay/ui/timerPage.dart';
+import 'package:apptuoicay/ui/historyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -67,8 +69,12 @@ class _HomePageState extends State<HomePage> {
     return IndexedStack(
       index: chooseIndex,
       children: <Widget>[
+        // MyHomePage(),
         MyHomePage(),
-        Setting()
+        Setting(),
+        TimerPage(),
+        HistoryPage()
+        // Graph(),
       ],
     );
   }
