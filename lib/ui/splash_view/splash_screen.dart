@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:apptuoicay/ui/contentApp.dart';
 import 'package:flutter/material.dart';
 import '../../res/constants.dart';
 import '../common_widget/soft_button.dart';
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(milliseconds: 5000), () {
       Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) => HomePage(),));
+        builder: (context) => ContentApp(),));
     });
   }
   @override

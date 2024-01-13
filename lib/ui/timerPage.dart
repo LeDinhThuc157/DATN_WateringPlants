@@ -219,14 +219,8 @@ class _TimerPageState extends State<TimerPage> {
                     onPressed: () {
                       try {
                         Navigator.of(context).pop();
-                        // FirebaseDatabase.instance
-                        //     .ref()
-                        //     .child(
-                        //     '9BSuk4QD4wWQzppwltKPfI3w63i2/id0/timesetting_pump/' +
-                        //         timeSetting['key'.toString()])
-                        //     .update(
-                        // Navigator.of(context).pop();
-                        if (timeSettings.length < 10) {
+                        int a = timeSettings.length;
+                        if (a < 11) {
                           timeSettings.add({
                             'hour': int.parse(hourController.text),
                             'minute': int.parse(minuteController.text),
@@ -261,7 +255,6 @@ class _TimerPageState extends State<TimerPage> {
                               'status':1
                             });
                           }
-                          timeSettings=[];
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -364,9 +357,6 @@ class _TimerPageState extends State<TimerPage> {
                                   picker.minute.toString();
                               timeController.text = time;
                             });
-
-                            print(picker.hour);
-                            print(picker.minute);
                           }
                         },
                         child: Icon(Icons.alarm_add),
