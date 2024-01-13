@@ -1,9 +1,11 @@
 import 'package:alarm/alarm.dart';
 import 'package:apptuoicay/firebase_options.dart';
 import 'package:apptuoicay/ui/homepage.dart';
+import 'package:apptuoicay/ui/splash_view/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 
 
 void main() async{
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  HomePage(),
+      home:  SplashScreen(),
     );
   }
 }
