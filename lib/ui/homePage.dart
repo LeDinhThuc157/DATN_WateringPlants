@@ -6,6 +6,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
+
+import '../mqtt/mqtt_client.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +22,8 @@ class _HomePageState extends State<HomePage> {
       FirebaseDatabase.instance.ref('9BSuk4QD4wWQzppwltKPfI3w63i2/id0');
   final database =
       FirebaseDatabase.instance.ref().child('9BSuk4QD4wWQzppwltKPfI3w63i2/id0');
+  final client = MqttServerClient('white-dev.aithings.vn', '');
+
   String status_pump = "";
   int current_himidity = 0;
   @override
@@ -37,6 +42,18 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<void> controlMqtt(String data) async {
+    MqttClient mqttClient = await MqttClient(client);
+    setState(() {
+      if(data.contains("turn_on")){
+        mqttClient.Publish(data);
+        status_pump = "on";
+      }else{
+        mqttClient.Publish(data);
+        status_pump = "off";
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,13 +158,10 @@ class _HomePageState extends State<HomePage> {
                       children: [
                       TextButton(
                         onPressed: () {
-                          database
-                              .update({
+                          database.update({
                             'status_pump':"off"
                           });
-                          setState(() {
-                            status_pump = "off";
-                          });
+                          controlMqtt("turn_off");
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -155,8 +169,7 @@ class _HomePageState extends State<HomePage> {
                             Text('Off'),
                             SizedBox(width: 8),
                             Image(
-                              image: AssetImage(
-                                  "assets/image/switch.png"),
+                              image: AssetImage("assets/image/switch.png"),
                               width: 35,
                             ),
                           ],
@@ -168,9 +181,7 @@ class _HomePageState extends State<HomePage> {
                               .update({
                             'status_pump':"on"
                           });
-                          setState(() {
-                            status_pump = "on";
-                          });
+                          controlMqtt("turn_on");
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
