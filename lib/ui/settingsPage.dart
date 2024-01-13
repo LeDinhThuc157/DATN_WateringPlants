@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-class MyHomePage extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SettingsPageState extends State<SettingsPage> {
   List<ScanResult> list_devcice = [];
   TextEditingController search_text = new TextEditingController();
   List<String> _searchResult = [];
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Home'),
+        title: Text('Settings'),
       ),
       body: Column(
         children: [

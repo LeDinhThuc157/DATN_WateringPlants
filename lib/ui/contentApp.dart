@@ -1,18 +1,19 @@
+import 'package:apptuoicay/ui/homePage.dart';
 import 'package:apptuoicay/ui/timerPage.dart';
 import 'package:apptuoicay/ui/historyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-import 'myhome.dart';
+import 'settingsPage.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ContentApp extends StatefulWidget {
+  const ContentApp({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ContentApp> createState() => _ContentAppState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ContentAppState extends State<ContentApp> {
   int chooseIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -45,28 +46,28 @@ class _HomePageState extends State<HomePage> {
             selectedIndex: chooseIndex,
             tabs: [
               GButton(
-                icon: Icons.heat_pump,
+                icon: Icons.home,
                 text: 'Home',
-                textSize: 25,
-                iconSize: 40,
+                textSize: 20,
+                iconSize: 30,
               ),
-              // GButton(
-              //   icon: Icons.location_on,
-              //   text: 'Map',
-              //   textSize: 25,
-              //   iconSize: 40,
-              // ),
+              GButton(
+                icon: Icons.settings,
+                text: 'Settings',
+                textSize: 20,
+                iconSize: 30,
+              ),
               GButton(
                 icon: Icons.watch_later,
                 text: 'Timer',
-                textSize: 25,
-                iconSize: 40,
+                textSize: 20,
+                iconSize: 30,
               ),
               GButton(
                 icon: Icons.history_edu_outlined,
                 text: 'Logs',
-                textSize: 25,
-                iconSize: 40,
+                textSize: 20,
+                iconSize: 30,
               ),
             ]
         ),
@@ -77,8 +78,8 @@ class _HomePageState extends State<HomePage> {
     return IndexedStack(
       index: chooseIndex,
       children: <Widget>[
-        // MyHomePage(),
-        MyHomePage(),
+        HomePage(),
+        SettingsPage(),
         TimerPage(),
         HistoryPage()
         // Graph(),
