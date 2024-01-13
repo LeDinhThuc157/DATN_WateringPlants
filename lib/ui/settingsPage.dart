@@ -61,6 +61,26 @@ class _SettingsPageState extends State<SettingsPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Bluetooth bluetooth = await On_Off();
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 8),
+                    Text('Vui lòng đợi...'),
+                  ],
+                ),
+              );
+            },
+          );
+
+          // Đóng dialog sau 5 giây
+          Future.delayed(Duration(seconds: 5), () {
+            Navigator.of(context).pop();
+          });
           Future.delayed(Duration(seconds: 5), () {
             // Sau khi chờ 5 giây, thực hiện công việc ở đây
             print("5 seconds have passed. Now executing the function.");
