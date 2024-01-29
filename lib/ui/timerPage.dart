@@ -412,10 +412,14 @@ class _TimerPageState extends State<TimerPage> {
                       if (timeSetting['minute_pump'] != -1) {
                         minutePumpController.text =
                             timeSetting['minute_pump'].toString();
+                      }else{
+                        minutePumpController.text = "-1";
                       }
                       if (timeSetting['humidity'] != -1) {
                         humidityController.text =
                             timeSetting['humidity'].toString();
+                      }else{
+                        humidityController.text="-1"; 
                       }
 
                       if (timeSetting['hour'] < 10) {
@@ -444,12 +448,24 @@ class _TimerPageState extends State<TimerPage> {
                                     decoration: InputDecoration(
                                         labelText: 'Minute Pump'),
                                     keyboardType: TextInputType.number,
+                                    onChanged: (text){
+                                      setState(() {
+                                        humidityController.text = "-1";
+                                      });
+                                      humidityController.text = "-1";
+                                    },
                                   ),
                                   TextField(
                                     controller: humidityController,
                                     decoration:
                                         InputDecoration(labelText: 'Humidity'),
                                     keyboardType: TextInputType.number,
+                                    onChanged: (text){
+                                      setState(() {
+                                        minutePumpController.text = "-1";
+                                      });
+                                      minutePumpController.text = "-1";
+                                    },
                                   ),
                                   Text('Timer alarm ',
                                       textAlign: TextAlign.left,
@@ -588,33 +604,35 @@ class _TimerPageState extends State<TimerPage> {
                                 onPressed: () {
                                   try {
                                     Navigator.of(context).pop();
-                                    FirebaseDatabase.instance
-                                        .ref()
-                                        .child(
-                                            '9BSuk4QD4wWQzppwltKPfI3w63i2/id0/timesetting_pump/' +
-                                                timeSetting['key'.toString()])
-                                        .update({
-                                      'hour': int.parse(hourController.text),
-                                      'minute':
-                                          int.parse(minuteController.text),
-                                      'humidity': humidityController.text == ''
-                                          ? -1
-                                          : int.parse(humidityController.text),
-                                      'minute_pump': minutePumpController
-                                                  .text ==
-                                              ''
-                                          ? -1
-                                          : int.parse(minutePumpController.text)
-                                    });
 
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return CustomAlertDialog(
-                                          message: "Change timer success",
-                                        );
-                                      },
-                                    );
+                                      FirebaseDatabase.instance
+                                          .ref()
+                                          .child(
+                                          '9BSuk4QD4wWQzppwltKPfI3w63i2/id0/timesetting_pump/' +
+                                              timeSetting['key'.toString()])
+                                          .update({
+                                        'hour': int.parse(hourController.text),
+                                        'minute':
+                                        int.parse(minuteController.text),
+                                        'humidity': humidityController.text == "-1"
+                                            ? -1
+                                            : int.parse(humidityController.text),
+                                        'minute_pump': minutePumpController
+                                            .text ==
+                                            "-1"
+                                            ? -1
+                                            : int.parse(minutePumpController.text)
+                                      });
+
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return CustomAlertDialog(
+                                            message: "Change timer success",
+                                          );
+                                        },
+                                      );
+
                                   } catch (e) {
                                     showDialog(
                                       context: context,
