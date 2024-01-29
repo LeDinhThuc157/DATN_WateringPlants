@@ -47,10 +47,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if(data.contains("turn_on")){
         mqttClient.Publish(data);
-        status_pump = "on";
       }else{
         mqttClient.Publish(data);
-        status_pump = "off";
       }
     });
   }
@@ -130,37 +128,12 @@ class _HomePageState extends State<HomePage> {
                     const BottomSheetHeaderTitle(
                       titleText: 'Pump Controll',
                     ),
-                    // Switch(
-                    //   value: status_pump=='off'?false:true,
-                    //   hoverColor: Colors.white,
-                    //   activeTrackColor: Colors.white,
-                    //   thumbColor: const MaterialStatePropertyAll(
-                    //       Colors.black45),
-                    //   inactiveThumbColor: Colors.grey,
-                    //   inactiveTrackColor: Colors.grey.withOpacity(.5),
-                    //   trackOutlineColor: const MaterialStatePropertyAll(
-                    //     Colors.transparent,
-                    //   ),
-                    //   onChanged: (value) {
-                    //
-                    //     database
-                    //         .update({
-                    //       'status_pump': status_pump =="off"?"on":"off"
-                    //     });
-                    //     setState(() {
-                    //       status_pump = status_pump =="off"?"on":"off";
-                    //     });
-                    //   },
-                    // ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                       TextButton(
                         onPressed: () {
-                          database.update({
-                            'status_pump':"off"
-                          });
                           controlMqtt("turn_off");
                         },
                         child: Row(
@@ -177,10 +150,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          database
-                              .update({
-                            'status_pump':"on"
-                          });
                           controlMqtt("turn_on");
                         },
                         child: Row(

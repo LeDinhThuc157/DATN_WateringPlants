@@ -35,7 +35,7 @@ class CardWidgets extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          "Time " + ((history['hour'].toString() != "0") ? history['hour'].toString():"00") +":"+((history['minute'].toString() != "0") ? history['minute'].toString():"00"),
+          "Time " + ((history['hour'] <10) ? "0"+history['hour'].toString():history['hour'].toString()) +":"+((history['minute'] < 10 ) ? "0"+history['minute'].toString():history['minute'].toString()),
           style: TextStyle(
             color: Colors.blue.shade700,
             fontSize: 16,
