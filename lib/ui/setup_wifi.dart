@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -57,6 +58,20 @@ class _Setup_WifiState extends State<Setup_Wifi> {
           TextButton(
               onPressed: () {
                 service();
+                AwesomeDialog(
+                  context: context,
+                  animType: AnimType.leftSlide,
+                  headerAnimationLoop: false,
+                  showCloseIcon: true,
+                  title: 'Setup Thành Công!',
+                  desc:
+                  'Tên Wifi: ${wifi.text}\nPassword: ${password.text}',
+                  btnOkOnPress: () {
+                  },
+                  btnOkIcon: Icons.check_circle,
+                  onDismissCallback: (type) {
+                  },
+                ).show();
               },
               child: Text("Sent")
           )
