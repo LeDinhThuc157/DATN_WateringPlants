@@ -16,6 +16,11 @@ class ContentApp extends StatefulWidget {
 
 class _ContentAppState extends State<ContentApp> {
   int chooseIndex = 0;
+  var pages =[
+    HomePage(),
+    SettingsPage(),
+    TimerPage(),
+    HistoryPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,15 +87,16 @@ class _ContentAppState extends State<ContentApp> {
     );
   }
   Widget getBarPage(){
-    return IndexedStack(
-      index: chooseIndex,
-      children: <Widget>[
-        HomePage(),
-        SettingsPage(),
-        TimerPage(),
-        HistoryPage()
-        // Graph(),
-      ],
-    );
+    return pages[chooseIndex];
+    // return IndexedStack(
+    //   index: chooseIndex,
+    //   children: <Widget>[
+    //     HomePage(),
+    //     SettingsPage(),
+    //     TimerPage(),
+    //     HistoryPage()
+    //     // Graph(),
+    //   ],
+    // );
   }
 }

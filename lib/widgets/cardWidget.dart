@@ -27,7 +27,9 @@ class CardWidgets extends StatelessWidget {
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
-            history['day'].toString() +"/"+history['month'].toString()+"/"+history['year'].toString(),
+            ((history['day'] <10) ? "0"+history['day'].toString():history['day'].toString())
+                +"/"+((history['month'] <10) ? "0"+history['month'].toString():history['month'].toString())
+                +"/"+history['year'].toString(),
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
