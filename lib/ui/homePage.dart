@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       FirebaseDatabase.instance.ref().child('9BSuk4QD4wWQzppwltKPfI3w63i2/id0');
   final client = MqttServerClient('white-dev.aithings.vn', '');
 
-  String status_pump = "";
+  String status_pump = "off";
   int current_himidity = 0;
   @override
   void initState() {
