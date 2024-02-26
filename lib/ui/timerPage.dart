@@ -604,34 +604,55 @@ class _TimerPageState extends State<TimerPage> {
                                 onPressed: () {
                                   try {
                                     Navigator.of(context).pop();
+                                      if((humidityController.text=="-1")&&(int.parse(minutePumpController.text)<1)){
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomErrorDialog(
+                                              errorMessage: "Minute Pump must be greater 0",
+                                            );
+                                          },
+                                        );
+                                      }else if((minutePumpController.text=="-1")&&(int.parse(humidityController.text)>100 ||int.parse(humidityController.text)<1)){
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomErrorDialog(
+                                              errorMessage: "Humidity must be in range 1 and 100",
+                                            );
+                                          },
+                                        );
+                                      }
+                                      else{
+                                        FirebaseDatabase.instance
+                                            .ref()
+                                            .child(
+                                            '9BSuk4QD4wWQzppwltKPfI3w63i2/id0/timesetting_pump/' +
+                                                timeSetting['key'.toString()])
+                                            .update({
+                                          'hour': int.parse(hourController.text),
+                                          'minute':
+                                          int.parse(minuteController.text),
+                                          'humidity': humidityController.text == "-1"
+                                              ? -1
+                                              : int.parse(humidityController.text),
+                                          'minute_pump': minutePumpController
+                                              .text ==
+                                              "-1"
+                                              ? -1
+                                              : int.parse(minutePumpController.text)
+                                        });
 
-                                      FirebaseDatabase.instance
-                                          .ref()
-                                          .child(
-                                          '9BSuk4QD4wWQzppwltKPfI3w63i2/id0/timesetting_pump/' +
-                                              timeSetting['key'.toString()])
-                                          .update({
-                                        'hour': int.parse(hourController.text),
-                                        'minute':
-                                        int.parse(minuteController.text),
-                                        'humidity': humidityController.text == "-1"
-                                            ? -1
-                                            : int.parse(humidityController.text),
-                                        'minute_pump': minutePumpController
-                                            .text ==
-                                            "-1"
-                                            ? -1
-                                            : int.parse(minutePumpController.text)
-                                      });
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomAlertDialog(
+                                              message: "Change timer success",
+                                            );
+                                          },
+                                        );
+                                      }
 
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return CustomAlertDialog(
-                                            message: "Change timer success",
-                                          );
-                                        },
-                                      );
 
                                   } catch (e) {
                                     showDialog(
